@@ -21,7 +21,9 @@
     <tr>
       <td><a href="{{this.full}}">{{this.full}}</a></td>
       <td><a href="{{this.short}}">{{this.short}}</a></td>
-      <td><button class="btn btn-danger">Delete</button></td>
+      <form action="./shorturls/{{this._id}}?_method=DELETE" method="POST">
+        <td><button type="submit" class="btn btn-danger">Delete</button></td>
+      </form>
     </tr>
     {{/each}}
   </tbody>

@@ -27,4 +27,12 @@ router.get('/:shortUrl', (req, res) => {
     .then((result) => res.redirect(result[0].full))
     .catch((error) => console.log(error))
 })
+
+router.delete('/shorturls/:id', (req, res) => {
+  const id = req.params.id
+  return ShortUrl.findById(id)
+    .then((url) => url.remove())
+    .then(() => res.redirect('/'))
+    .catch((error) => console.log(error))
+})
 module.exports = router
