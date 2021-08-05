@@ -50,6 +50,11 @@ router.get('/:shortUrl', (req, res) => {
 
 router.delete('/shorturls/:id', (req, res) => {
   const id = req.params.id
+
+  if (id == null) {
+    return res.sendStatus(404)
+  }
+
   return ShortUrl.findById(id)
     .then((url) => url.remove())
     .then(() => res.redirect('/'))
