@@ -3,8 +3,6 @@ const shortUrl = require('../../models/shortUrl')
 const router = express.Router()
 const ShortUrl = require('../../models/shortUrl')
 const getShortUrl = require('../../tools/getShortUrl')
-const PORT = process.env.PORT || 3000
-const rootUrl = process.env.ROOT_URL || `http://localhost:${PORT}/`
 
 router.get('/', (req, res) => {
   ShortUrl.find()
@@ -17,6 +15,8 @@ router.post('/shorturls', (req, res) => {
   const fullUrl = req.body.fullUrl
   const protocol = req.protocol
   const host = req.headers.host
+  const rootUrl = protocol + '://' + host + '/'
+  console.log(rootUrl)
   ShortUrl.find()
     .lean()
     .then((urls) => {
@@ -41,6 +41,9 @@ router.post('/shorturls', (req, res) => {
 })
 
 router.get('/:shortUrl', (req, res) => {
+  const protocol = req.protocol
+  const host = req.headers.host
+  const rootUrl = protocol + '://' + host + '/'
   const shorturl = `${rootUrl}${req.params.shortUrl}`
   ShortUrl.find({ short: shorturl })
     .lean()
