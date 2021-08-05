@@ -16,7 +16,6 @@ router.post('/shorturls', (req, res) => {
   const protocol = req.protocol
   const host = req.headers.host
   const rootUrl = protocol + '://' + host + '/'
-  console.log(rootUrl)
   ShortUrl.find()
     .lean()
     .then((urls) => {
